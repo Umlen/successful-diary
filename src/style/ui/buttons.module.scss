@@ -1,0 +1,25 @@
+@mixin buttons() {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  display: grid;
+  place-items: center;
+}
+
+.baseButton {
+  @include buttons();
+  border-radius: 12px;
+  padding: 1em 5em;
+}
+
+.roundButton {
+  @include buttons();
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.transparentButton {
+  @include buttons();
+  background-color: transparent;
+}

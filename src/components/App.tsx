@@ -1,27 +1,18 @@
 import { type FunctionComponent, useState } from 'react';
 import GridDays from './GridDays';
 import SingleDay from './SingleDay';
+import ControlsBar from './ui/ControlsBar';
 
 const App: FunctionComponent = () => {
   const [isGridView, setIsGridView] = useState(false);
 
-  function gridViewOn(): void {
-    setIsGridView(true);
-  }
-
-  function gridViewOff(): void {
-    setIsGridView(false);
+  function gridViewToggler(): void {
+    setIsGridView((prevViewState) => !prevViewState);
   }
 
   return (
     <>
-      <div className="controlBar">
-        <div>
-          <button onClick={gridViewOff}>Single day view</button>
-          <button onClick={gridViewOn}>Grid days view</button>
-        </div>
-        <button>Settings</button>
-      </div>
+      <ControlsBar isGridView={isGridView} gridViewToggler={gridViewToggler} />
       {isGridView ? <GridDays /> : <SingleDay />}
     </>
   );

@@ -14,7 +14,7 @@ const ControlsBar: FunctionComponent<ControlsBarProps> = (props) => {
   const { isGridView, gridViewToggler } = props;
 
   return (
-    <div className={styles.controlBar}>
+    <div className={styles.controlsBar}>
       <TransparentButton onClick={gridViewToggler}>
         {isGridView ? (
           <img src={singleIcon} alt="" />

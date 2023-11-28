@@ -8,7 +8,7 @@ interface DayInGridProps {
 const DayInGrid: FunctionComponent<DayInGridProps> = ({ date }) => {
   return (
     <div className={styles.dayBlock}>
-      <h3>{date}</h3>
+      <p>{date}</p>
     </div>
   );
 };

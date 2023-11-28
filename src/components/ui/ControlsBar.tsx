@@ -1,7 +1,10 @@
 import { type FunctionComponent } from 'react';
-import gridIcon from '../../assets/icons/grid-icon.svg';
-import singleIcon from '../../assets/icons/single-day-icon.svg';
-import settingsIcon from '../../assets/icons/settings-icon.svg';
+import gridIconDark from '../../assets/icons/grid-icon-dark.svg';
+import singleIconDark from '../../assets/icons/single-day-icon-dark.svg';
+import settingsIconDark from '../../assets/icons/settings-icon-dark.svg';
+/* import gridIconLight from '../../assets/icons/grid-icon-light.svg';
+import singleIconLight from '../../assets/icons/single-day-icon-light.svg';
+import settingsIconLight from '../../assets/icons/settings-icon-light.svg'; */
 import TransparentButton from './TransparentButton';
 import styles from '../../style/ui/controlsBar.module.scss';
 
@@ -17,13 +20,13 @@ const ControlsBar: FunctionComponent<ControlsBarProps> = (props) => {
     <div className={styles.controlsBar}>
       <TransparentButton onClick={gridViewToggler}>
         {isGridView ? (
-          <img src={singleIcon} alt="" />
+          <img src={singleIconDark} alt="" />
         ) : (
-          <img src={gridIcon} alt="" />
+          <img src={gridIconDark} alt="" />
         )}
       </TransparentButton>
       <TransparentButton>
-        <img src={settingsIcon} alt="" />
+        <img src={settingsIconDark} alt="" />
       </TransparentButton>
     </div>
   );

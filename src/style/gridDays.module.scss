@@ -1,13 +1,14 @@
 .daysWrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem 2rem;
+  gap: 2rem;
 }
 
 .dayBlock {
   cursor: pointer;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 0.5rem;
+  border: 1px solid var(--highlight-color);
+  box-shadow: 0 0 10px 1px var(--highlight-shadow);
+  padding: 0.65rem;
   text-align: center;
+  letter-spacing: 1.35px;
 }

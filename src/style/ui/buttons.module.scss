@@ -1,25 +1,44 @@
 @mixin buttons() {
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
   display: grid;
   place-items: center;
+  cursor: pointer;
 }
 
-.baseButton {
+.rectangleButton,
+.squareButton {
   @include buttons();
-  border-radius: 12px;
-  padding: 1em 5em;
+  border: 2px solid transparent;
+  transition: 0.2s linear;
+  font-family: inherit;
+  letter-spacing: 2px;
+  font-weight: 500;
+  background-color: var(--highlight-color);
+  color: var(--main-color);
+  box-shadow: 0 0 15px 2px var(--highlight-shadow);
+
+  &:hover {
+    background-color: transparent;
+    border-color: var(--highlight-color);
+    color: var(--highlight-color);
+  }
+  &:active {
+    box-shadow: inset 2px 2px 3px 1px var(--shadow-color);
+  }
 }
 
-.roundButton {
-  @include buttons();
-  border-radius: 50%;
+.rectangleButton {
+  padding: 0.75rem 3.5rem;
+  font-size: 1.15rem;
+}
+
+.squareButton {
   width: 3rem;
   height: 3rem;
+  font-size: 1.8rem;
 }
 
 .transparentButton {
   @include buttons();
+  border: none;
   background-color: transparent;
 }

@@ -1,19 +1,19 @@
 import { type ComponentPropsWithoutRef, type FunctionComponent } from 'react';
 import styles from '../../style/ui/buttons.module.scss';
 
-interface RoundButtonProps extends ComponentPropsWithoutRef<'button'> {
+interface SquareButtonProps extends ComponentPropsWithoutRef<'button'> {
   children: JSX.Element | string;
 }
 
-const RoundButton: FunctionComponent<RoundButtonProps> = ({
+const SquareButton: FunctionComponent<SquareButtonProps> = ({
   children,
   ...props
 }) => {
   return (
-    <button {...props} className={styles.roundButton}>
+    <button {...props} className={styles.squareButton}>
       {children}
     </button>
   );
 };
 
-export default RoundButton;
+export default SquareButton;

@@ -1,0 +1,19 @@
+:root {
+  /*LIGHT*/
+  /*
+  --secondary-color: #151d28;
+  --main-color: #e4edfb;
+  --textarea-color: #fefefe;
+  --highlight-color: #59253a;
+  --highlight-shadow: transparent;
+  --shadow-color: rgba(0, 0, 0, 0.35);
+*/
+  /*DARK*/
+
+  --secondary-color: #eeeeee;
+  --main-color: #222831;
+  --textarea-color: #393e46;
+  --highlight-color: #08d9d6;
+  --highlight-shadow: rgba(8, 217, 214, 0.25);
+  --shadow-color: rgba(0, 0, 0, 0.65);
+}

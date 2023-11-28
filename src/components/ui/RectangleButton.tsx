@@ -1,19 +1,19 @@
 import { type ComponentPropsWithoutRef, type FunctionComponent } from 'react';
 import styles from '../../style/ui/buttons.module.scss';
 
-interface BaseButtonProps extends ComponentPropsWithoutRef<'button'> {
+interface RectangleButtonProps extends ComponentPropsWithoutRef<'button'> {
   buttonText: string;
 }
 
-const BaseButton: FunctionComponent<BaseButtonProps> = ({
+const RectangleButton: FunctionComponent<RectangleButtonProps> = ({
   buttonText,
   ...props
 }) => {
   return (
-    <button {...props} className={styles.baseButton}>
+    <button {...props} className={styles.rectangleButton}>
       {buttonText}
     </button>
   );
 };
 
-export default BaseButton;
+export default RectangleButton;

@@ -2,7 +2,11 @@ import { type CalendarType } from '../types/types';
 
 export const getCurrentDate = (): string => {
   const date = new Date();
-  return [date.getDate(), date.getMonth() + 1, date.getFullYear()].join(' / ');
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = String(date.getFullYear()).slice(-2);
+
+  return [day, month, year].join(' / ');
 };
 
 export const getDaysFromCalendar = (

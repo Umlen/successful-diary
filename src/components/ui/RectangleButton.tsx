@@ -2,16 +2,16 @@ import { type ComponentPropsWithoutRef, type FunctionComponent } from 'react';
 import styles from '../../style/ui/buttons.module.scss';
 
 interface RectangleButtonProps extends ComponentPropsWithoutRef<'button'> {
-  buttonText: string;
+  children: JSX.Element | string;
 }
 
 const RectangleButton: FunctionComponent<RectangleButtonProps> = ({
-  buttonText,
+  children,
   ...props
 }) => {
   return (
     <button {...props} className={styles.rectangleButton}>
-      {buttonText}
+      {children}
     </button>
   );
 };

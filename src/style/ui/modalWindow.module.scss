@@ -1,0 +1,36 @@
+.blackout {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: 650px;
+  height: 555px;
+  background-color: var(--shadow-color);
+  display: grid;
+  place-items: center;
+}
+
+.modalWindow {
+  background-color: var(--main-color);
+  position: relative;
+  padding: 3rem 2.5rem;
+}
+
+.themeText {
+  letter-spacing: 1.3px;
+  margin-bottom: -1rem;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 1rem;
+  height: auto;
+  cursor: pointer;
+  transition: 0.2s linear;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}

@@ -25,7 +25,10 @@ const ControlsBar: FunctionComponent<ControlsBarProps> = (props) => {
   return (
     <div className={styles.controlsBar}>
       {isModalShown && <ModalWindow modalWindowToggler={modalWindowToggler} />}
-      <TransparentButton onClick={gridViewToggler}>
+      <TransparentButton
+        onClick={gridViewToggler}
+        aria-label="change view button"
+      >
         {isGridView ? (
           <img src={singleIconDark} alt="" />
         ) : (

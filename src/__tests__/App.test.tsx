@@ -10,11 +10,27 @@ test('SingleDay render when the app is started', () => {
 test('GridDays render when change view button clicked', () => {
   render(<App />);
 
-  const button = screen.getByLabelText('change view button');
+  const changeViewButton = screen.getByLabelText('change view button');
 
-  fireEvent.click(button);
+  fireEvent.click(changeViewButton);
 
   expect(
     screen.queryByPlaceholderText('Enter text...'),
   ).not.toBeInTheDocument();
+});
+
+test('SingleDay render when change view button clicked', () => {
+  render(<App />);
+
+  const changeViewButton = screen.getByLabelText('change view button');
+
+  fireEvent.click(changeViewButton);
+
+  expect(
+    screen.queryByPlaceholderText('Enter text...'),
+  ).not.toBeInTheDocument();
+
+  fireEvent.click(changeViewButton);
+
+  expect(screen.getByPlaceholderText('Enter text...')).toBeInTheDocument();
 });

@@ -35,7 +35,10 @@ const ControlsBar: FunctionComponent<ControlsBarProps> = (props) => {
           <img src={gridIconDark} alt="" />
         )}
       </TransparentButton>
-      <TransparentButton onClick={modalWindowToggler}>
+      <TransparentButton
+        onClick={modalWindowToggler}
+        aria-label="settings button"
+      >
         <img src={settingsIconDark} alt="" />
       </TransparentButton>
     </div>

@@ -17,7 +17,7 @@ const ModalWindow: FunctionComponent<ModalWindowProps> = ({
         <img
           onClick={modalWindowToggler}
           src={closeIconDark}
-          alt=""
+          alt="close modal window button"
           className={styles.closeIcon}
         />
         <div className="flexColumn">

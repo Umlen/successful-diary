@@ -14,3 +14,13 @@ export const getDaysFromCalendar = (
 ): CalendarType[] => {
   return calendar.length <= 15 ? calendar : calendar.slice(0, 15);
 };
+
+export const getLocalStorageTheme = (): string => {
+  const savedTheme = localStorage.getItem('SuccessDiaryTheme');
+
+  if (savedTheme) {
+    return savedTheme;
+  }
+
+  return 'light';
+};

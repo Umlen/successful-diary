@@ -1,13 +1,16 @@
 import { useState, type FunctionComponent } from 'react';
+import { useTheme } from '../../hooks/hooks';
+import TransparentButton from './TransparentButton';
+import ModalWindow from './ModalWindow';
+
 import gridIconDark from '../../assets/icons/grid-icon-dark.svg';
 import singleIconDark from '../../assets/icons/single-day-icon-dark.svg';
 import settingsIconDark from '../../assets/icons/settings-icon-dark.svg';
-/* import gridIconLight from '../../assets/icons/grid-icon-light.svg';
+import gridIconLight from '../../assets/icons/grid-icon-light.svg';
 import singleIconLight from '../../assets/icons/single-day-icon-light.svg';
-import settingsIconLight from '../../assets/icons/settings-icon-light.svg'; */
-import TransparentButton from './TransparentButton';
+import settingsIconLight from '../../assets/icons/settings-icon-light.svg';
+
 import styles from '../../style/ui/controlsBar.module.scss';
-import ModalWindow from './ModalWindow';
 
 interface ControlsBarProps {
   isGridView: boolean;
@@ -17,6 +20,7 @@ interface ControlsBarProps {
 const ControlsBar: FunctionComponent<ControlsBarProps> = (props) => {
   const { isGridView, gridViewToggler } = props;
   const [isModalShown, setIsModalShown] = useState(false);
+  const [theme, changeTheme] = useTheme();
 
   function modalWindowToggler(): void {
     setIsModalShown((prevModalState) => !prevModalState);
@@ -24,22 +28,34 @@ const ControlsBar: FunctionComponent<ControlsBarProps> = (props) => {
 
   return (
     <div className={styles.controlsBar}>
-      {isModalShown && <ModalWindow modalWindowToggler={modalWindowToggler} />}
+      {isModalShown && (
+        <ModalWindow
+          theme={theme}
+          modalWindowToggler={modalWindowToggler}
+          changeTheme={changeTheme}
+        />
+      )}
       <TransparentButton
         onClick={gridViewToggler}
         aria-label="change view button"
       >
         {isGridView ? (
-          <img src={singleIconDark} alt="" />
+          <img
+            src={theme === 'light' ? singleIconLight : singleIconDark}
+            alt=""
+          />
         ) : (
-          <img src={gridIconDark} alt="" />
+          <img src={theme === 'light' ? gridIconLight : gridIconDark} alt="" />
         )}
       </TransparentButton>
       <TransparentButton
         onClick={modalWindowToggler}
         aria-label="settings button"
       >
-        <img src={settingsIconDark} alt="" />
+        <img
+          src={theme === 'light' ? settingsIconLight : settingsIconDark}
+          alt=""
+        />
       </TransparentButton>
     </div>
   );

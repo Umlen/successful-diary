@@ -1,19 +1,37 @@
 :root {
-  /*LIGHT*/
-  /*
-  --secondary-color: #151d28;
-  --main-color: #e4edfb;
-  --textarea-color: #fefefe;
-  --highlight-color: #59253a;
-  --highlight-shadow: transparent;
-  --shadow-color: rgba(0, 0, 0, 0.35);
-*/
-  /*DARK*/
+  /*light theme*/
 
-  --secondary-color: #eeeeee;
-  --main-color: #222831;
-  --textarea-color: #393e46;
-  --highlight-color: #08d9d6;
-  --highlight-shadow: rgba(8, 217, 214, 0.25);
-  --shadow-color: rgba(0, 0, 0, 0.65);
+  --secondary-color-light: #151d28;
+  --main-color-light: #e4edfb;
+  --textarea-color-light: #fefefe;
+  --highlight-color-light: #59253a;
+  --highlight-shadow-light: transparent;
+  --shadow-color-light: rgba(0, 0, 0, 0.35);
+
+  /*dark theme*/
+
+  --secondary-color-dark: #eeeeee;
+  --main-color-dark: #222831;
+  --textarea-color-dark: #393e46;
+  --highlight-color-dark: #08d9d6;
+  --highlight-shadow-dark: rgba(8, 217, 214, 0.25);
+  --shadow-color-dark: rgba(0, 0, 0, 0.65);
+}
+
+[data-theme='light'] {
+  --secondary-color: var(--secondary-color-light);
+  --main-color: var(--main-color-light);
+  --textarea-color: var(--textarea-color-light);
+  --highlight-color: var(--highlight-color-light);
+  --highlight-shadow: var(--highlight-shadow-light);
+  --shadow-color: var(--shadow-color-light);
+}
+
+[data-theme='dark'] {
+  --secondary-color: var(--secondary-color-dark);
+  --main-color: var(--main-color-dark);
+  --textarea-color: var(--textarea-color-dark);
+  --highlight-color: var(--highlight-color-dark);
+  --highlight-shadow: var(--highlight-shadow-dark);
+  --shadow-color: var(--shadow-color-dark);
 }

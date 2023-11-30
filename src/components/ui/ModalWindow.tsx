@@ -1,22 +1,24 @@
 import { type FunctionComponent } from 'react';
-import closeIconDark from '../../assets/icons/close-icon-dark.svg';
-/* import closeIconLight from '../../assets/icons/close-icon-light.svg'; */
 import RectangleButton from './RectangleButton';
+import closeIconDark from '../../assets/icons/close-icon-dark.svg';
+import closeIconLight from '../../assets/icons/close-icon-light.svg';
 import styles from '../../style/ui/modalWindow.module.scss';
 
 interface ModalWindowProps {
+  theme: string;
   modalWindowToggler: () => void;
+  changeTheme: () => void;
 }
 
-const ModalWindow: FunctionComponent<ModalWindowProps> = ({
-  modalWindowToggler,
-}) => {
+const ModalWindow: FunctionComponent<ModalWindowProps> = (props) => {
+  const { theme, modalWindowToggler, changeTheme } = props;
+
   return (
     <div className={styles.blackout}>
       <div className={`flexColumn ${styles.modalWindow}`}>
         <img
           onClick={modalWindowToggler}
-          src={closeIconDark}
+          src={theme === 'light' ? closeIconLight : closeIconDark}
           alt="close modal window button"
           className={styles.closeIcon}
         />
@@ -26,8 +28,9 @@ const ModalWindow: FunctionComponent<ModalWindowProps> = ({
         </div>
         <p className={styles.themeText}>Theme</p>
         <div className="flexRow">
-          <RectangleButton>Dark</RectangleButton>
-          <RectangleButton>Light</RectangleButton>
+          <RectangleButton onClick={changeTheme}>
+            {theme === 'light' ? 'Dark' : 'Light'}
+          </RectangleButton>
         </div>
       </div>
     </div>

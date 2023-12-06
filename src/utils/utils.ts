@@ -15,6 +15,13 @@ export const getDaysFromCalendar = (
   return calendar.length <= 15 ? calendar : calendar.slice(0, 15);
 };
 
+export const getDayById = (
+  calendar: CalendarType[],
+  id: string,
+): CalendarType => {
+  return calendar.filter((day) => day._id === id)[0];
+};
+
 export const getLocalStorageTheme = (): string => {
   const savedTheme = localStorage.getItem('SuccessDiaryTheme');
 

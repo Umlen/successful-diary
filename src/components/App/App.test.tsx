@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import App from '../components/App';
+import App from './App';
 
 test('SingleDay render when the app is started', () => {
   render(<App />);

@@ -1,5 +1,5 @@
 import { type ComponentPropsWithoutRef, type FunctionComponent } from 'react';
-import styles from '../../style/ui/buttons.module.scss';
+import styles from './buttons.module.scss';
 
 interface TransparentButtonProps extends ComponentPropsWithoutRef<'button'> {
   children: JSX.Element | string;

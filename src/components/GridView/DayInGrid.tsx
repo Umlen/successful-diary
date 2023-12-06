@@ -1,5 +1,5 @@
 import { type FunctionComponent } from 'react';
-import styles from '../style/gridDays.module.scss';
+import styles from './gridDays.module.scss';
 
 interface DayInGridProps {
   date: string;

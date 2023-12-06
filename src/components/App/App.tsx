@@ -1,7 +1,7 @@
 import { type FunctionComponent, useState } from 'react';
-import GridDays from './GridDays';
-import SingleDay from './SingleDay';
-import ControlsBar from './ui/ControlsBar';
+import GridDays from '../GridView/GridDays';
+import SingleDay from '../SingleDay';
+import ControlsBar from '../ui/ControlsBar/ControlsBar';
 
 const App: FunctionComponent = () => {
   const [isGridView, setIsGridView] = useState(false);

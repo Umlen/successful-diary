@@ -1,16 +1,16 @@
 import { useState, type FunctionComponent } from 'react';
-import { useTheme } from '../../hooks/hooks';
-import TransparentButton from './TransparentButton';
-import ModalWindow from './ModalWindow';
+import { useTheme } from '../../../hooks/hooks';
+import TransparentButton from '../Buttons/TransparentButton';
+import ModalWindow from '../Modals/ModalWindow';
 
-import gridIconDark from '../../assets/icons/grid-icon-dark.svg';
-import singleIconDark from '../../assets/icons/single-day-icon-dark.svg';
-import settingsIconDark from '../../assets/icons/settings-icon-dark.svg';
-import gridIconLight from '../../assets/icons/grid-icon-light.svg';
-import singleIconLight from '../../assets/icons/single-day-icon-light.svg';
-import settingsIconLight from '../../assets/icons/settings-icon-light.svg';
+import gridIconDark from '../../../assets/icons/grid-icon-dark.svg';
+import singleIconDark from '../../../assets/icons/single-day-icon-dark.svg';
+import settingsIconDark from '../../../assets/icons/settings-icon-dark.svg';
+import gridIconLight from '../../../assets/icons/grid-icon-light.svg';
+import singleIconLight from '../../../assets/icons/single-day-icon-light.svg';
+import settingsIconLight from '../../../assets/icons/settings-icon-light.svg';
 
-import styles from '../../style/ui/controlsBar.module.scss';
+import styles from './controlsBar.module.scss';
 
 interface ControlsBarProps {
   isGridView: boolean;

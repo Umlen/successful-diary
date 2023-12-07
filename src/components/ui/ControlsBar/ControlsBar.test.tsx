@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import ControlsBar from '../components/ui/ControlsBar';
+import ControlsBar from './ControlsBar';
 
 test('Open modal window when settings button clicked', () => {
   render(<ControlsBar isGridView={false} gridViewToggler={() => {}} />);

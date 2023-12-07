@@ -1,8 +1,8 @@
 import { type FunctionComponent } from 'react';
-import RectangleButton from './RectangleButton';
-import closeIconDark from '../../assets/icons/close-icon-dark.svg';
-import closeIconLight from '../../assets/icons/close-icon-light.svg';
-import styles from '../../style/ui/modalWindow.module.scss';
+import RectangleButton from '../Buttons/RectangleButton';
+import closeIconDark from '../../../assets/icons/close-icon-dark.svg';
+import closeIconLight from '../../../assets/icons/close-icon-light.svg';
+import styles from './modalWindow.module.scss';
 
 interface ModalWindowProps {
   theme: string;

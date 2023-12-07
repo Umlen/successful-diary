@@ -1,9 +1,9 @@
 import { type FunctionComponent } from 'react';
-import testData from '../data/testCalendar.json';
-import { getDaysFromCalendar } from '../utils/utils';
-import SquareButton from './ui/SquareButton';
+import testData from '../../data/testCalendar.json';
+import { getDaysFromCalendar } from '../../utils/utils';
+import SquareButton from '../ui/Buttons/SquareButton';
 import DayInGrid from './DayInGrid';
-import styles from '../style/gridDays.module.scss';
+import styles from './gridDays.module.scss';
 
 const GridDays: FunctionComponent = () => {
   const days = getDaysFromCalendar(testData.days);

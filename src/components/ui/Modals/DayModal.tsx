@@ -1,12 +1,12 @@
 import { type FunctionComponent } from 'react';
-import testData from '../../data/testCalendar.json';
-import { useTheme } from '../../hooks/hooks';
-import { getDayById } from '../../utils/utils';
-import RectangleButton from './RectangleButton';
-import TextArea from './TextArea';
-import closeIconDark from '../../assets/icons/close-icon-dark.svg';
-import closeIconLight from '../../assets/icons/close-icon-light.svg';
-import styles from '../../style/ui/modalWindow.module.scss';
+import testData from '../../../data/testCalendar.json';
+import { useTheme } from '../../../hooks/hooks';
+import { getDayById } from '../../../utils/utils';
+import RectangleButton from '../Buttons/RectangleButton';
+import TextArea from '../Inputs/TextArea';
+import closeIconDark from '../../../assets/icons/close-icon-dark.svg';
+import closeIconLight from '../../../assets/icons/close-icon-light.svg';
+import styles from './modalWindow.module.scss';
 
 interface DayModalProps {
   id: string;

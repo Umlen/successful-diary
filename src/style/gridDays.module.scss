@@ -4,8 +4,10 @@
   gap: 2rem;
 }
 
-.dayBlock {
+.dayButton {
   cursor: pointer;
+  background-color: transparent;
+  color: inherit;
   border: 1px solid var(--highlight-color);
   box-shadow: 0 0 10px 1px var(--highlight-shadow);
   padding: 0.65rem;

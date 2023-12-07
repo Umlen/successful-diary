@@ -16,22 +16,25 @@ const ModalWindow: FunctionComponent<ModalWindowProps> = (props) => {
   return (
     <div className={styles.blackout}>
       <div className={`flexColumn ${styles.modalWindow}`}>
-        <img
+        <button
+          className={styles.closeButton}
           onClick={modalWindowToggler}
-          src={theme === 'light' ? closeIconLight : closeIconDark}
-          alt="close modal window button"
-          className={styles.closeIcon}
-        />
+          aria-label="close modal window button"
+        >
+          <img
+            src={theme === 'light' ? closeIconLight : closeIconDark}
+            className={styles.closeIcon}
+            alt=""
+          />
+        </button>
         <div className="flexColumn">
           <RectangleButton>Log in</RectangleButton>
           <RectangleButton>Sign up</RectangleButton>
         </div>
         <p className={styles.themeText}>Theme</p>
-        <div className="flexRow">
-          <RectangleButton onClick={changeTheme}>
-            {theme === 'light' ? 'Dark' : 'Light'}
-          </RectangleButton>
-        </div>
+        <RectangleButton onClick={changeTheme}>
+          {theme === 'light' ? 'Dark' : 'Light'}
+        </RectangleButton>
       </div>
     </div>
   );

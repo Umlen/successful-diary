@@ -20,7 +20,7 @@ test('Close modal window when close button clicked', () => {
 
   expect(screen.getByText('Log in')).toBeInTheDocument();
 
-  const closeModalWindowButton = screen.getByAltText(
+  const closeModalWindowButton = screen.getByLabelText(
     'close modal window button',
   );
 

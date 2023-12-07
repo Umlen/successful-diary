@@ -21,12 +21,17 @@ const DayModal: FunctionComponent<DayModalProps> = (props) => {
   return (
     <div className={styles.blackout}>
       <div className={`flexColumn ${styles.modalWindow}`}>
-        <img
+        <button
+          className={styles.closeButton}
           onClick={modalWindowToggler}
-          src={theme === 'light' ? closeIconLight : closeIconDark}
-          alt="close modal window button"
-          className={styles.closeIcon}
-        />
+          aria-label="close modal window button"
+        >
+          <img
+            src={theme === 'light' ? closeIconLight : closeIconDark}
+            className={styles.closeIcon}
+            alt=""
+          />
+        </button>
         <h2>{selectedDay.date}</h2>
         <TextArea defaultValue={selectedDay.text} />
         <RectangleButton>Save</RectangleButton>

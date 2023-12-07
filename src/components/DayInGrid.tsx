@@ -19,9 +19,9 @@ const DayInGrid: FunctionComponent<DayInGridProps> = ({ id, date }) => {
       {isModalShown && (
         <DayModal id={id} modalWindowToggler={modalWindowToggler} />
       )}
-      <div className={styles.dayBlock} onClick={modalWindowToggler}>
+      <button className={styles.dayButton} onClick={modalWindowToggler}>
         <p>{date}</p>
-      </div>
+      </button>
     </>
   );
 };

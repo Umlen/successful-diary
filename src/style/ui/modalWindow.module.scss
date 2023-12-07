@@ -21,14 +21,21 @@
   margin-bottom: -1rem;
 }
 
+.closeButton,
 .closeIcon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.closeButton {
+  display: block;
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  width: 0.75rem;
-  height: auto;
   cursor: pointer;
   transition: 0.2s linear;
+  background-color: transparent;
+  border: none;
 
   &:hover {
     transform: scale(1.2);

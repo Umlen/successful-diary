@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import GridDays from '../components/GridDays';
+import GridDays from './GridDays';
 
 test('Open modal window when clicked on day div', () => {
   render(<GridDays />);

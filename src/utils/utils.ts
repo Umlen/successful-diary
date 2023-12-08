@@ -11,8 +11,10 @@ export const getCurrentDate = (): string => {
 
 export const getDaysFromCalendar = (
   calendar: CalendarType[],
+  flag: number,
 ): CalendarType[] => {
-  return calendar.length <= 15 ? calendar : calendar.slice(0, 15);
+  const spliceStart = calendar.length - flag < 0 ? 0 : calendar.length - flag;
+  return [...calendar].splice(spliceStart, 15);
 };
 
 export const getLocalStorageTheme = (): string => {
@@ -23,4 +25,23 @@ export const getLocalStorageTheme = (): string => {
   }
 
   return 'light';
+};
+
+export const checkGridDaysFlag = (
+  flag: number,
+  dataLength: number,
+): { checkedIsStart: boolean; checkedIsEnd: boolean } => {
+  if (dataLength === 15) {
+    return { checkedIsStart: true, checkedIsEnd: true };
+  }
+
+  if (flag >= dataLength) {
+    return { checkedIsStart: true, checkedIsEnd: false };
+  }
+
+  if (flag === 15) {
+    return { checkedIsStart: false, checkedIsEnd: true };
+  }
+
+  return { checkedIsStart: false, checkedIsEnd: false };
 };

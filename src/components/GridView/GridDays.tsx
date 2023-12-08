@@ -1,16 +1,41 @@
-import { type FunctionComponent } from 'react';
+import { useState, type FunctionComponent, useEffect } from 'react';
 import testData from '../../data/testCalendar.json';
-import { getDaysFromCalendar } from '../../utils/utils';
+import { checkGridDaysFlag, getDaysFromCalendar } from '../../utils/utils';
 import SquareButton from '../ui/Buttons/SquareButton';
 import DayInGrid from './DayInGrid';
 import styles from './gridDays.module.scss';
 
 const GridDays: FunctionComponent = () => {
-  const days = getDaysFromCalendar(testData.days);
+  const [isStart, setIsStart] = useState(false);
+  const [isEnd, setIsEnd] = useState(true);
+  const [flag, setFlag] = useState(15);
+  const [days, setDays] = useState(getDaysFromCalendar(testData.days, flag));
+
+  useEffect(() => {
+    const { checkedIsStart, checkedIsEnd } = checkGridDaysFlag(
+      flag,
+      testData.days.length,
+    );
+
+    setIsStart(checkedIsStart);
+    setIsEnd(checkedIsEnd);
+  }, [flag]);
+
+  function increaseFlag(): void {
+    const newFlag = flag + 15;
+    setFlag(newFlag);
+    setDays(getDaysFromCalendar(testData.days, newFlag));
+  }
+
+  function decreaseFlag(): void {
+    const newFlag = flag - 15;
+    setFlag(newFlag);
+    setDays(getDaysFromCalendar(testData.days, newFlag));
+  }
 
   return (
     <div className="flexRow">
-      <SquareButton>
+      <SquareButton disabled={isStart} onClick={increaseFlag}>
         <p>&lt;</p>
       </SquareButton>
       <div className={styles.daysWrapper}>
@@ -18,7 +43,7 @@ const GridDays: FunctionComponent = () => {
           <DayInGrid key={day._id} date={day.date} />
         ))}
       </div>
-      <SquareButton>
+      <SquareButton disabled={isEnd} onClick={decreaseFlag}>
         <p>&gt;</p>
       </SquareButton>
     </div>

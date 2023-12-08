@@ -1,6 +1,6 @@
 import { type FunctionComponent, useState } from 'react';
 import GridDays from '../GridView/GridDays';
-import SingleDay from '../SingleDay';
+import SingleDay from '../SingleDay/SingleDay';
 import ControlsBar from '../ui/ControlsBar/ControlsBar';
 
 const App: FunctionComponent = () => {

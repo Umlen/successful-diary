@@ -1,17 +1,22 @@
 import { type FunctionComponent } from 'react';
+import testData from '../../../data/testCalendar.json';
+import { useTheme } from '../../../hooks/hooks';
+import { getDayById } from '../../../utils/utils';
 import RectangleButton from '../Buttons/RectangleButton';
+import TextArea from '../Inputs/TextArea';
 import closeIconDark from '../../../assets/icons/close-icon-dark.svg';
 import closeIconLight from '../../../assets/icons/close-icon-light.svg';
 import styles from './modalWindow.module.scss';
 
-interface ModalWindowProps {
-  theme: string;
+interface DayModalProps {
+  id: string;
   modalWindowToggler: () => void;
-  changeTheme: () => void;
 }
 
-const ModalWindow: FunctionComponent<ModalWindowProps> = (props) => {
-  const { theme, modalWindowToggler, changeTheme } = props;
+const DayModal: FunctionComponent<DayModalProps> = (props) => {
+  const { id, modalWindowToggler } = props;
+  const [theme] = useTheme();
+  const selectedDay = getDayById(testData.days, id);
 
   return (
     <div className={styles.blackout}>
@@ -27,17 +32,12 @@ const ModalWindow: FunctionComponent<ModalWindowProps> = (props) => {
             alt=""
           />
         </button>
-        <div className="flexColumn">
-          <RectangleButton>Log in</RectangleButton>
-          <RectangleButton>Sign up</RectangleButton>
-        </div>
-        <p className={styles.themeText}>Theme</p>
-        <RectangleButton onClick={changeTheme}>
-          {theme === 'light' ? 'Dark' : 'Light'}
-        </RectangleButton>
+        <h2>{selectedDay.date}</h2>
+        <TextArea defaultValue={selectedDay.text} />
+        <RectangleButton>Save</RectangleButton>
       </div>
     </div>
   );
 };
 
-export default ModalWindow;
+export default DayModal;

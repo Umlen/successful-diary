@@ -4,11 +4,27 @@
   gap: 2rem;
 }
 
-.dayBlock {
+.dayButton {
   cursor: pointer;
+  background-color: transparent;
+  color: inherit;
   border: 1px solid var(--highlight-color);
   box-shadow: 0 0 10px 1px var(--highlight-shadow);
   padding: 0.65rem;
   text-align: center;
   letter-spacing: 1.35px;
+  transition: 0.8s linear;
+
+  &:hover {
+    background-color: var(--highlight-color);
+    color: var(--main-color);
+    transform: scale(1.15);
+    transition: 0.3s linear;
+  }
+
+  &:active {
+    transition: 0.2s linear;
+    transform: scale(1.1);
+    box-shadow: inset 2px 2px 5px 1px var(--shadow-color);
+  }
 }

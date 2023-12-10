@@ -1,15 +1,28 @@
-import { type FunctionComponent } from 'react';
+import { type FunctionComponent, useState } from 'react';
+import DayModal from '../ui/Modals/DayModal';
 import styles from './gridDays.module.scss';
 
 interface DayInGridProps {
+  id: string;
   date: string;
 }
 
-const DayInGrid: FunctionComponent<DayInGridProps> = ({ date }) => {
+const DayInGrid: FunctionComponent<DayInGridProps> = ({ id, date }) => {
+  const [isModalShown, setIsModalShown] = useState(false);
+
+  function modalWindowToggler(): void {
+    setIsModalShown((prevModalState) => !prevModalState);
+  }
+
   return (
-    <div className={styles.dayBlock}>
-      <p>{date}</p>
-    </div>
+    <>
+      {isModalShown && (
+        <DayModal id={id} modalWindowToggler={modalWindowToggler} />
+      )}
+      <button className={styles.dayButton} onClick={modalWindowToggler}>
+        <p>{date}</p>
+      </button>
+    </>
   );
 };
 

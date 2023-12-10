@@ -40,7 +40,7 @@ const GridDays: FunctionComponent = () => {
       </SquareButton>
       <div className={styles.daysWrapper}>
         {days.map((day) => (
-          <DayInGrid key={day._id} date={day.date} />
+          <DayInGrid key={day._id} id={day._id} date={day.date} />
         ))}
       </div>
       <SquareButton disabled={isEnd} onClick={decreaseFlag}>

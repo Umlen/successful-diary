@@ -1,3 +1,4 @@
+import type React from 'react';
 import { useState, type FunctionComponent } from 'react';
 import { getCurrentDate, saveNewDay } from '../../utils/utils';
 import SquareButton from '../ui/Buttons/SquareButton';
@@ -9,14 +10,11 @@ const SingleDay: FunctionComponent = () => {
   const [isTextAreaEmpty, setIsTextAreaEmpty] = useState(true);
   const date = getCurrentDate();
 
-  function textAreaHandler(textAreaValue: string): void {
-    setDayText(textAreaValue);
+  function textAreaHandler(e: React.ChangeEvent<HTMLTextAreaElement>): void {
+    const textAreaValue = e.target.value;
 
-    if (textAreaValue.trim().length) {
-      setIsTextAreaEmpty(false);
-    } else {
-      setIsTextAreaEmpty(true);
-    }
+    setDayText(textAreaValue);
+    setIsTextAreaEmpty(!textAreaValue.trim().length);
   }
 
   function saveButtonHandler(): void {
@@ -27,21 +25,19 @@ const SingleDay: FunctionComponent = () => {
 
   return (
     <div className="flexRow">
-      <SquareButton>&lt;</SquareButton>
+      <SquareButton aria-label="previous day">&lt;</SquareButton>
       <div className="flexColumn">
         <h2>{date}</h2>
         <TextArea
           placeholder="Enter text..."
           value={dayText}
-          onChange={(e) => {
-            textAreaHandler(e.target.value);
-          }}
+          onChange={textAreaHandler}
         />
         <RectangleButton disabled={isTextAreaEmpty} onClick={saveButtonHandler}>
           Save
         </RectangleButton>
       </div>
-      <SquareButton>&gt;</SquareButton>
+      <SquareButton aria-label="next day">&gt;</SquareButton>
     </div>
   );
 };

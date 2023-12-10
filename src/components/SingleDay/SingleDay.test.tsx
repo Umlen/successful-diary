@@ -5,9 +5,12 @@ import testData from '../../data/testCalendar.json';
 test('Save button is disabled if textarea is empty', () => {
   render(<SingleDay />);
 
+  const daysLength = testData.days.length;
   const saveButton = screen.getByText('Save');
 
-  expect(saveButton.hasAttribute('disabled')).toBe(true);
+  fireEvent.click(saveButton);
+
+  expect(testData.days.length).toBe(daysLength);
 });
 
 test('TextArea typing', () => {

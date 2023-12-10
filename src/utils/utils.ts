@@ -38,5 +38,4 @@ export const saveNewDay = (date: string, text: string): void => {
   const newDay: CalendarType = { _id, date, text };
 
   testData.days.push(newDay);
-  console.log(testData);
 };

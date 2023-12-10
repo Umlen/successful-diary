@@ -10,17 +10,13 @@ const GridDays: FunctionComponent = () => {
 
   return (
     <div className="flexRow">
-      <SquareButton>
-        <p>&lt;</p>
-      </SquareButton>
+      <SquareButton aria-label="previous 15 days">&lt;</SquareButton>
       <div className={styles.daysWrapper}>
         {days.map((day) => (
           <DayInGrid key={day._id} id={day._id} date={day.date} />
         ))}
       </div>
-      <SquareButton>
-        <p>&gt;</p>
-      </SquareButton>
+      <SquareButton aria-label="next 15 days">&gt;</SquareButton>
     </div>
   );
 };

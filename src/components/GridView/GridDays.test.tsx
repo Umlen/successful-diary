@@ -28,3 +28,22 @@ test('Close modal window when close button clicked', () => {
 
   expect(screen.queryByText('Save')).not.toBeInTheDocument();
 });
+
+test('PreviousButton test', () => {
+  render(<GridDays />);
+
+  const previousButton = screen.getByLabelText('previous 15 days');
+  const nextButton = screen.getByLabelText('next 15 days');
+
+  expect(nextButton).toBeDisabled();
+  expect(previousButton).not.toBeDisabled();
+
+  fireEvent.click(previousButton);
+
+  expect(nextButton).not.toBeDisabled();
+
+  fireEvent.click(previousButton);
+
+  expect(nextButton).not.toBeDisabled();
+  expect(previousButton).toBeDisabled();
+});

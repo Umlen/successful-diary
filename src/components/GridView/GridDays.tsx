@@ -40,16 +40,24 @@ const GridDays: FunctionComponent = () => {
 
   return (
     <div className="flexRow">
-      <SquareButton disabled={isStart} onClick={increaseCalendarSeparator}>
-        <p>&lt;</p>
+      <SquareButton
+        disabled={isStart}
+        onClick={increaseCalendarSeparator}
+        aria-label="previous 15 days"
+      >
+        &lt;
       </SquareButton>
       <div className={styles.daysWrapper}>
         {days.map((day) => (
           <DayInGrid key={day._id} id={day._id} date={day.date} />
         ))}
       </div>
-      <SquareButton disabled={isEnd} onClick={decreaseCalendarSeparator}>
-        <p>&gt;</p>
+      <SquareButton
+        disabled={isEnd}
+        onClick={decreaseCalendarSeparator}
+        aria-label="next 15 days"
+      >
+        &gt;
       </SquareButton>
     </div>
   );

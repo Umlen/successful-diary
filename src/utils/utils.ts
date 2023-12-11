@@ -37,7 +37,7 @@ export const checkCalendarSeparator = (
   calendarSeparator: number,
   calendarLength: number,
 ): { checkedIsStart: boolean; checkedIsEnd: boolean } => {
-  if (calendarLength === AMOUNT_OF_DISPLAYED_DAYS) {
+  if (calendarLength <= AMOUNT_OF_DISPLAYED_DAYS) {
     return { checkedIsStart: true, checkedIsEnd: true };
   }
 

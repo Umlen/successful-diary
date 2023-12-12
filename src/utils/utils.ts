@@ -39,3 +39,11 @@ export const saveNewDay = (date: string, text: string): void => {
 
   testData.days.push(newDay);
 };
+
+export const editExistingDayText = (id: string, newText: string): void => {
+  testData.days.forEach((day) => {
+    if (day._id === id) {
+      day.text = newText;
+    }
+  });
+};

@@ -1,8 +1,8 @@
 import { type FunctionComponent } from 'react';
-import { getCurrentDate } from '../utils/utils';
-import SquareButton from './ui/Buttons/SquareButton';
-import RectangleButton from './ui/Buttons/RectangleButton';
-import TextArea from './ui/Inputs/TextArea';
+import { getCurrentDate } from '@Utils/utils';
+import SquareButton from '@Ui/Buttons/SquareButton';
+import RectangleButton from '@Ui/Buttons/RectangleButton';
+import TextArea from '@Ui/Inputs/TextArea';
 
 const SingleDay: FunctionComponent = () => {
   const date = getCurrentDate();

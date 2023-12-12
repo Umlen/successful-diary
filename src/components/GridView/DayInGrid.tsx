@@ -1,5 +1,5 @@
 import { type FunctionComponent, useState } from 'react';
-import DayModal from '../ui/Modals/DayModal';
+import DayModal from '@Ui/Modals/DayModal';
 import styles from './gridDays.module.scss';
 
 interface DayInGridProps {

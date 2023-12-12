@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getLocalStorageTheme } from '../utils/utils';
+import { getLocalStorageTheme } from '@Utils/utils';
 
 export const useTheme = (): [string, () => void] => {
   const [theme, setTheme] = useState(getLocalStorageTheme());

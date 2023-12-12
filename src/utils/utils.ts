@@ -1,4 +1,4 @@
-import { type CalendarType } from '../types/types';
+import { type CalendarType } from '@Types/types';
 
 export const getCurrentDate = (): string => {
   const date = new Date();

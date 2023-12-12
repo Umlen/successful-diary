@@ -1,16 +1,14 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import SingleDay from './SingleDay';
-import testData from '../../data/testCalendar.json';
 
 test('Save button is disabled if textarea is empty', () => {
   render(<SingleDay />);
 
-  const daysLength = testData.days.length;
   const saveButton = screen.getByText('Save');
 
   fireEvent.click(saveButton);
 
-  expect(testData.days.length).toBe(daysLength);
+  expect(screen.queryByText('Saved successfully')).not.toBeInTheDocument();
 });
 
 test('TextArea typing', () => {
@@ -26,12 +24,11 @@ test('TextArea typing', () => {
 test('Save button is enabled if textarea has text', () => {
   render(<SingleDay />);
 
-  const daysLength = testData.days.length;
   const textArea = screen.getByRole('textbox');
   const saveButton = screen.getByText('Save');
 
   fireEvent.change(textArea, { target: { value: 'testing' } });
   fireEvent.click(saveButton);
 
-  expect(testData.days.length).toBe(daysLength + 1);
+  expect(screen.getByText('Saved successfully')).toBeInTheDocument();
 });

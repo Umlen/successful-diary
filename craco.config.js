@@ -16,4 +16,19 @@ module.exports = {
       '@Style': resolvePath('src/style'),
     },
   },
+  jest: {
+    configure: {
+      moduleNameMapper: {
+        '^@(.*)$': '<rootDir>/src$1',
+        '^@Assets(.*)$': '<rootDir>/src/assets$1',
+        '^@Components(.*)$': '<rootDir>/src/components$1',
+        '^@Ui(.*)$': '<rootDir>/src/ui$1',
+        '^@Data(.*)$': '<rootDir>/src/data$1',
+        '^@Hooks(.*)$': '<rootDir>/src/hooks$1',
+        '^@Utils(.*)$': '<rootDir>/src/utils$1',
+        '^@Types(.*)$': '<rootDir>/src/types$1',
+        '^@Style(.*)$': '<rootDir>/src/style$1',
+      },
+    },
+  },
 };

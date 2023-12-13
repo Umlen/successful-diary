@@ -1,4 +1,5 @@
 import { type CalendarType } from '../types/types';
+import testData from '../data/testCalendar.json';
 
 export const getCurrentDate = (): string => {
   const date = new Date();
@@ -30,4 +31,19 @@ export const getLocalStorageTheme = (): string => {
   }
 
   return 'light';
+};
+
+export const saveNewDay = (date: string, text: string): void => {
+  const _id = `${date} ${text}`;
+  const newDay: CalendarType = { _id, date, text };
+
+  testData.days.push(newDay);
+};
+
+export const editExistingDayText = (id: string, newText: string): void => {
+  testData.days.forEach((day) => {
+    if (day._id === id) {
+      day.text = newText;
+    }
+  });
 };

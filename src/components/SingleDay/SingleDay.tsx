@@ -1,10 +1,10 @@
 import type React from 'react';
 import { useState, type FunctionComponent } from 'react';
-import { getCurrentDate, saveNewDay } from '../../utils/utils';
-import SquareButton from '../ui/Buttons/SquareButton';
-import RectangleButton from '../ui/Buttons/RectangleButton';
-import TextArea from '../ui/Inputs/TextArea';
-import SaveModal from '../ui/Modals/SaveModal';
+import { getCurrentDate, saveNewDay } from '@Utils/utils';
+import SquareButton from '@Ui/Buttons/SquareButton';
+import RectangleButton from '@Ui/Buttons/RectangleButton';
+import TextArea from '@Ui/Inputs/TextArea';
+import SaveModal from '@Ui/Modals/SaveModal';
 
 const SingleDay: FunctionComponent = () => {
   const [dayText, setDayText] = useState('');

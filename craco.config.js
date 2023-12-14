@@ -1,4 +1,6 @@
 const path = require('path');
+const { pathsToModuleNameMapper } = require('ts-jest');
+const { compilerOptions } = require('./tsconfig.json');
 
 const resolvePath = (p) => path.resolve(__dirname, p);
 
@@ -18,17 +20,10 @@ module.exports = {
   },
   jest: {
     configure: {
-      moduleNameMapper: {
-        '^@(.*)$': '<rootDir>/src$1',
-        '^@Assets(.*)$': '<rootDir>/src/assets$1',
-        '^@Components(.*)$': '<rootDir>/src/components$1',
-        '^@Ui(.*)$': '<rootDir>/src/ui$1',
-        '^@Data(.*)$': '<rootDir>/src/data$1',
-        '^@Hooks(.*)$': '<rootDir>/src/hooks$1',
-        '^@Utils(.*)$': '<rootDir>/src/utils$1',
-        '^@Types(.*)$': '<rootDir>/src/types$1',
-        '^@Style(.*)$': '<rootDir>/src/style$1',
-      },
+      preset: 'ts-jest',
+      moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+        prefix: '<rootDir>/',
+      }),
     },
   },
 };

@@ -79,6 +79,7 @@
     "rules": {
       "@typescript-eslint/strict-boolean-expressions": "off",
       "import/no-unresolved": "off",
+      "no-console": "warn",
       "prettier/prettier": [
         "warn",
         {

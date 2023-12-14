@@ -78,8 +78,8 @@ describe('checkCalendarSeparator test', () => {
 
   test('calendarSeparator bigger than calendarLength', () => {
     const expectedObject = { checkedIsStart: true, checkedIsEnd: false };
-    const calendarLength = 10;
-    const calendarSeparator = AMOUNT_OF_DISPLAYED_DAYS;
+    const calendarLength = 20;
+    const calendarSeparator = 30;
 
     expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(
       expectedObject,
@@ -98,7 +98,7 @@ describe('checkCalendarSeparator test', () => {
 
   test('calendarSeparator equal to AMOUNT_OF_DISPLAYED_DAYS', () => {
     const expectedObject = { checkedIsStart: false, checkedIsEnd: true };
-    const calendarLength = AMOUNT_OF_DISPLAYED_DAYS;
+    const calendarLength = 20;
     const calendarSeparator = AMOUNT_OF_DISPLAYED_DAYS;
 
     expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(

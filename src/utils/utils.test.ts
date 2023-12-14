@@ -3,28 +3,26 @@ import {
   getDaysFromCalendar,
   getDayById,
   getLocalStorageTheme,
+  editExistingDayText,
+  saveNewDay,
+  checkCalendarSeparator,
 } from './utils';
 
-const calendar = [
-  { _id: '1', date: '1 / 1 / 11', text: '1' },
-  { _id: '2', date: '2 / 2 / 22', text: '2' },
-  { _id: '3', date: '3 / 3 / 33', text: '3' },
-  { _id: '4', date: '4 / 4 / 44', text: '4' },
-  { _id: '5', date: '5 / 5 / 55', text: '5' },
-  { _id: '6', date: '6 / 6 / 66', text: '6' },
-  { _id: '7', date: '7 / 7 / 77', text: '7' },
-  { _id: '8', date: '8 / 8 / 88', text: '8' },
-  { _id: '9', date: '9 / 9 / 99', text: '9' },
-  { _id: '10', date: '10 / 10 / 10', text: '10' },
-  { _id: '11', date: '11 / 11 / 11', text: '11' },
-  { _id: '12', date: '12 / 12 / 12', text: '12' },
-  { _id: '13', date: '13 / 13 / 13', text: '13' },
-  { _id: '14', date: '14 / 14 / 14', text: '14' },
-  { _id: '15', date: '15 / 15 / 15', text: '15' },
-  { _id: '16', date: '16 / 16 / 16', text: '16' },
-];
+import testData from '../data/testCalendar.json';
+import { AMOUNT_OF_DISPLAYED_DAYS } from './constants';
 
-test('getCurrentDate', () => {
+jest.mock('./constants.ts', () => ({ AMOUNT_OF_DISPLAYED_DAYS: 3 }));
+
+jest.mock('../data/testCalendar.json', () => ({
+  days: [
+    { _id: '1', date: '1 / 1 / 11', text: '1' },
+    { _id: '2', date: '2 / 2 / 22', text: '2' },
+    { _id: '3', date: '3 / 3 / 33', text: '3' },
+    { _id: '4', date: '4 / 4 / 44', text: '4' },
+  ],
+}));
+
+test('function getCurrentDate returns the current date in "day / month / year" format', () => {
   const dateString = `${new Date().getDate()} / ${
     new Date().getMonth() + 1
   } / ${String(new Date().getFullYear()).slice(-2)}`;
@@ -33,36 +31,44 @@ test('getCurrentDate', () => {
 });
 
 describe('getDaysFromCalendar', () => {
-  const AMOUNT_OF_DISPLAYED_DAYS = 15;
-
-  test('returns 15 days if a calendar is greater than or equal to AMOUNT_OF_DISPLAYED_DAYS', () => {
-    const equalCalendar = calendar.slice(0, AMOUNT_OF_DISPLAYED_DAYS);
-    const greaterCalendarResult = getDaysFromCalendar(calendar);
-    const equalCalendarResult = getDaysFromCalendar(equalCalendar);
+  test('returns last 3 days if a calendar is greater than AMOUNT_OF_DISPLAYED_DAYS', () => {
+    const equalCalendar = testData.days.slice(-3);
+    const greaterCalendarResult = getDaysFromCalendar(
+      testData.days,
+      AMOUNT_OF_DISPLAYED_DAYS,
+    );
 
     expect(greaterCalendarResult).toEqual(equalCalendar);
-    expect(equalCalendarResult).toEqual(equalCalendar);
   });
 
-  test('returns a full calendar if it is less than AMOUNT_OF_DISPLAYED_DAYS', () => {
-    const smallCalendar = calendar.slice(0, AMOUNT_OF_DISPLAYED_DAYS - 5);
-    const result = getDaysFromCalendar(smallCalendar);
+  test('returns a full calendar if it is less than or equal to AMOUNT_OF_DISPLAYED_DAYS', () => {
+    const smallCalendar = testData.days.slice(0, AMOUNT_OF_DISPLAYED_DAYS - 1);
+    const equalCalendar = testData.days.slice(0, AMOUNT_OF_DISPLAYED_DAYS);
+    const smallCalendarResult = getDaysFromCalendar(
+      smallCalendar,
+      AMOUNT_OF_DISPLAYED_DAYS,
+    );
+    const equalCalendarResult = getDaysFromCalendar(
+      equalCalendar,
+      AMOUNT_OF_DISPLAYED_DAYS,
+    );
 
-    expect(result).toEqual(smallCalendar);
+    expect(smallCalendarResult).toEqual(smallCalendar);
+    expect(equalCalendarResult).toEqual(equalCalendar);
   });
 });
 
 describe('getDayById', () => {
   test('returns the correct day for a given id', () => {
     const id = '1';
-    const result = getDayById(calendar, id);
+    const result = getDayById(testData.days, id);
 
     expect(result).toEqual({ _id: '1', date: '1 / 1 / 11', text: '1' });
   });
 
   test('returns undefined for a non-existent id', () => {
-    const id = '17';
-    const result = getDayById(calendar, id);
+    const id = '5';
+    const result = getDayById(testData.days, id);
 
     expect(result).toBeUndefined();
   });
@@ -84,5 +90,110 @@ describe('getLocalStorageTheme', () => {
   test('returns default value if localstorage does not store theme', () => {
     localStorage.removeItem('SuccessDiaryTheme');
     expect(getLocalStorageTheme()).toBe('light');
+  });
+});
+
+describe('saveNewDay function', () => {
+  beforeEach(() => {
+    testData.days = [];
+  });
+
+  test('correctly adds a new day', () => {
+    const date = '13 / 12 / 23';
+    const text = 'test text';
+    const _id = `${date} ${text}`;
+    const expectedDayObject = { _id, date, text };
+
+    saveNewDay(date, text);
+
+    expect(testData.days).toContainEqual(expectedDayObject);
+  });
+});
+
+describe('editExistingDayText function', () => {
+  beforeEach(() => {
+    testData.days = [{ _id: '1', date: '13 / 12 / 23', text: 'initial text' }];
+  });
+
+  test('correctly edits an existing day', () => {
+    const newText = 'updated text';
+
+    editExistingDayText('1', newText);
+
+    const editedDay = testData.days.find((day) => day._id === '1');
+
+    expect(editedDay?.text).toBe(newText);
+  });
+
+  test('does not change text for non-existent id', () => {
+    const newText = 'updated text';
+
+    editExistingDayText('non-existent-id', newText);
+
+    const editedDay = testData.days.find((day) => day._id === '1');
+
+    expect(editedDay?.text).not.toBe(newText);
+  });
+});
+
+describe('checkCalendarSeparator test', () => {
+  test('calendarLength less than AMOUNT_OF_DISPLAYED_DAYS', () => {
+    const expectedObject = { checkedIsStart: true, checkedIsEnd: true };
+    const calendarLength = 0;
+    const calendarSeparator = AMOUNT_OF_DISPLAYED_DAYS;
+
+    expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(
+      expectedObject,
+    );
+  });
+
+  test('calendarLength equal to AMOUNT_OF_DISPLAYED_DAYS', () => {
+    const expectedObject = { checkedIsStart: true, checkedIsEnd: true };
+    const calendarLength = AMOUNT_OF_DISPLAYED_DAYS;
+    const calendarSeparator = AMOUNT_OF_DISPLAYED_DAYS;
+
+    expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(
+      expectedObject,
+    );
+  });
+
+  test('calendarSeparator bigger than calendarLength', () => {
+    const expectedObject = { checkedIsStart: true, checkedIsEnd: false };
+    const calendarLength = 20;
+    const calendarSeparator = 30;
+
+    expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(
+      expectedObject,
+    );
+  });
+
+  test('calendarSeparator equal to calendarLength', () => {
+    const expectedObject = { checkedIsStart: true, checkedIsEnd: false };
+    const calendarLength = 30;
+    const calendarSeparator = 30;
+
+    expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(
+      expectedObject,
+    );
+  });
+
+  test('calendarSeparator equal to AMOUNT_OF_DISPLAYED_DAYS', () => {
+    const expectedObject = { checkedIsStart: false, checkedIsEnd: true };
+    const calendarLength = 20;
+    const calendarSeparator = AMOUNT_OF_DISPLAYED_DAYS;
+
+    expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(
+      expectedObject,
+    );
+  });
+
+  test('calendarSeparator less than calendarLength and bigger than AMOUNT_OF_DISPLAYED_DAYS', () => {
+    const expectedObject = { checkedIsStart: false, checkedIsEnd: false };
+    const calendarLength = 45;
+    const calendarSeparator = calendarLength - AMOUNT_OF_DISPLAYED_DAYS;
+
+    expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(
+      expectedObject,
+    );
   });
 });

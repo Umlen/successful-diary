@@ -60,6 +60,13 @@ export const getDayById = (
   return calendar.filter((day) => day._id === id)[0];
 };
 
+export const getDayByDate = (
+  calendar: CalendarType[],
+  date: string,
+): CalendarType | undefined => {
+  return calendar.find((day) => day.date === date);
+};
+
 export const saveNewDay = (date: string, text: string): void => {
   const _id = `${date} ${text}`;
   const newDay: CalendarType = { _id, date, text };

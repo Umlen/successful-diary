@@ -2,6 +2,7 @@ import {
   editExistingDayText,
   saveNewDay,
   checkCalendarSeparator,
+  getDayByDate,
 } from './utils';
 
 import testData from '../data/testCalendar.json';
@@ -114,5 +115,25 @@ describe('checkCalendarSeparator test', () => {
     expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(
       expectedObject,
     );
+  });
+});
+
+describe('getDayByDate function', () => {
+  beforeEach(() => {
+    testData.days = [];
+  });
+
+  test('returns undefined if calendar does not include a day with passed date', () => {
+    const result = getDayByDate(testData.days, '15 / 12 / 23');
+
+    expect(result).toBeUndefined();
+  });
+
+  test('returns a day with passed date if calendar includes it', () => {
+    const expectedDay = { _id: '1', date: '15 / 12 / 23', text: '1' };
+    testData.days = [expectedDay];
+    const result = getDayByDate(testData.days, '15 / 12 / 23');
+
+    expect(result).toEqual(expectedDay);
   });
 });

@@ -1,6 +1,12 @@
 import type React from 'react';
-import { useState, type FunctionComponent } from 'react';
-import { getCurrentDate, saveNewDay } from '../../utils/utils';
+import { useState, type FunctionComponent, useEffect } from 'react';
+import testCalendar from '../../data/testCalendar.json';
+import {
+  getCurrentDate,
+  getDayByDate,
+  saveNewDay,
+  editExistingDayText,
+} from '../../utils/utils';
 import SquareButton from '../ui/Buttons/SquareButton';
 import RectangleButton from '../ui/Buttons/RectangleButton';
 import TextArea from '../ui/Inputs/TextArea';
@@ -12,6 +18,15 @@ const SingleDay: FunctionComponent = () => {
   const [isSaved, setIsSaved] = useState(false);
   const date = getCurrentDate();
 
+  useEffect(() => {
+    const existingDayWithDate = getDayByDate(testCalendar.days, date);
+
+    if (existingDayWithDate) {
+      setDayText(existingDayWithDate.text);
+      setIsTextAreaEmpty(false);
+    }
+  }, [date]);
+
   function textAreaHandler(e: React.ChangeEvent<HTMLTextAreaElement>): void {
     const textAreaValue = e.target.value;
 
@@ -20,9 +35,13 @@ const SingleDay: FunctionComponent = () => {
   }
 
   function saveButtonHandler(): void {
-    saveNewDay(date, dayText);
-    setDayText('');
-    setIsTextAreaEmpty(true);
+    const existingDayWithDate = getDayByDate(testCalendar.days, date);
+
+    if (existingDayWithDate) {
+      editExistingDayText(existingDayWithDate._id, dayText);
+    } else {
+      saveNewDay(date, dayText);
+    }
     setIsSaved(true);
   }
 

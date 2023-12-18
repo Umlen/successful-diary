@@ -1,16 +1,16 @@
 import type React from 'react';
 import { useState, type FunctionComponent, useEffect } from 'react';
-import testCalendar from '../../data/testCalendar.json';
+import testCalendar from '@Data/testCalendar.json';
 import {
   getCurrentDate,
   getDayByDate,
   saveNewDay,
   editExistingDayText,
-} from '../../utils/utils';
-import SquareButton from '../ui/Buttons/SquareButton';
-import RectangleButton from '../ui/Buttons/RectangleButton';
-import TextArea from '../ui/Inputs/TextArea';
-import SaveModal from '../ui/Modals/SaveModal';
+} from '@Utils/utils';
+import SquareButton from '@Ui/Buttons/SquareButton';
+import RectangleButton from '@Ui/Buttons/RectangleButton';
+import TextArea from '@Ui/Inputs/TextArea';
+import SaveModal from '@Ui/Modals/SaveModal';
 
 const SingleDay: FunctionComponent = () => {
   const [dayText, setDayText] = useState('');

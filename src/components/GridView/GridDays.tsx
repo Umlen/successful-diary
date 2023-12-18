@@ -1,7 +1,7 @@
 import { useState, type FunctionComponent, useEffect } from 'react';
-import testData from '../../data/testCalendar.json';
-import { checkCalendarSeparator, getDaysFromCalendar } from '../../utils/utils';
-import SquareButton from '../ui/Buttons/SquareButton';
+import testData from '@Data/testCalendar.json';
+import { getDaysFromCalendar, checkCalendarSeparator } from '@Utils/utils';
+import SquareButton from '@Ui/Buttons/SquareButton';
 import DayInGrid from './DayInGrid';
 import styles from './gridDays.module.scss';
 

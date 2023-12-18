@@ -1,14 +1,14 @@
 import { useState, type FunctionComponent } from 'react';
-import { useTheme } from '../../../hooks/hooks';
+import { useTheme } from '@Hooks/hooks';
 import TransparentButton from '../Buttons/TransparentButton';
 import ModalWindow from '../Modals/ModalWindow';
 
-import gridIconDark from '../../../assets/icons/grid-icon-dark.svg';
-import singleIconDark from '../../../assets/icons/single-day-icon-dark.svg';
-import settingsIconDark from '../../../assets/icons/settings-icon-dark.svg';
-import gridIconLight from '../../../assets/icons/grid-icon-light.svg';
-import singleIconLight from '../../../assets/icons/single-day-icon-light.svg';
-import settingsIconLight from '../../../assets/icons/settings-icon-light.svg';
+import gridIconDark from '@Assets/icons/grid-icon-dark.svg';
+import singleIconDark from '@Assets/icons/single-day-icon-dark.svg';
+import settingsIconDark from '@Assets/icons/settings-icon-dark.svg';
+import gridIconLight from '@Assets/icons/grid-icon-light.svg';
+import singleIconLight from '@Assets/icons/single-day-icon-light.svg';
+import settingsIconLight from '@Assets/icons/settings-icon-light.svg';
 
 import styles from './controlsBar.module.scss';
 

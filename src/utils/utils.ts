@@ -1,5 +1,5 @@
-import { type CalendarType } from '../types/types';
-import testData from '../data/testCalendar.json';
+import { type CalendarType } from '@Types/types';
+import testData from '@Data/testCalendar.json';
 import { AMOUNT_OF_DISPLAYED_DAYS } from './constants';
 
 export const getLocalStorageTheme = (): string => {

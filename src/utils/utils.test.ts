@@ -7,14 +7,15 @@ import {
   saveNewDay,
   checkCalendarSeparator,
   getDayByDate,
+  getDayIndexByDate,
 } from './utils';
 
-import testData from '../data/testCalendar.json';
+import testData from '@Data/testCalendar.json';
 import { AMOUNT_OF_DISPLAYED_DAYS } from './constants';
 
 jest.mock('./constants.ts', () => ({ AMOUNT_OF_DISPLAYED_DAYS: 3 }));
 
-jest.mock('../data/testCalendar.json', () => ({
+jest.mock('@Data/testCalendar.json', () => ({
   days: [
     { _id: '1', date: '1 / 1 / 11', text: '1' },
     { _id: '2', date: '2 / 2 / 22', text: '2' },
@@ -216,5 +217,21 @@ describe('getDayByDate function', () => {
     const result = getDayByDate(testData.days, '15 / 12 / 23');
 
     expect(result).toEqual(expectedDay);
+  });
+});
+
+describe('getDayIndexByDate function', () => {
+  test('returns index of a day with passed date if calendar includes it', () => {
+    const expectedIndex = 1;
+    const result = getDayIndexByDate(testData.days, '2 / 2 / 22');
+
+    expect(result).toBe(expectedIndex);
+  });
+
+  test('returns calendar length if calendar does not include a day with passed date', () => {
+    const expectedValue = testData.days.length;
+    const result = getDayIndexByDate(testData.days, 'no such date');
+
+    expect(result).toBe(expectedValue);
   });
 });

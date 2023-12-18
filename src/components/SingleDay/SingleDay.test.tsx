@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import testData from '../../data/testCalendar.json';
-import { getCurrentDate } from '../../utils/utils';
+import testData from '@Data/testCalendar.json';
+import { getCurrentDate } from '@Utils/utils';
 import SingleDay from './SingleDay';
 
-jest.mock('../../data/testCalendar.json', () => ({
+jest.mock('@Data/testCalendar.json', () => ({
   days: [],
 }));
 
@@ -74,4 +74,51 @@ test('TextArea typing', () => {
   fireEvent.change(textArea, { target: { value: 'testing' } });
 
   expect(textArea.textContent).toBe('testing');
+});
+
+test(`Should display current day on render. 
+  Clicks on previous button until reaches the beginning of a days array. 
+  On each click it should render previous day. 
+  Then previous button has to become disabled and next button has to be enabled. 
+  Clicks on next button until reaches the ending of days array. 
+  On each click it should render next day. 
+  Finally both buttons have to return to their default sate and current day has to be rendered`, () => {
+  testData.days = [
+    { _id: '1', date: '1 / 1 / 11', text: '1' },
+    { _id: '2', date: '2 / 2 / 22', text: '2' },
+  ];
+
+  render(<SingleDay />);
+
+  const previousButton = screen.getByLabelText('previous day');
+  const nextButton = screen.getByLabelText('next day');
+  const currentDate = getCurrentDate();
+
+  expect(screen.getByText(currentDate)).toBeInTheDocument();
+  expect(nextButton).toBeDisabled();
+  expect(previousButton).not.toBeDisabled();
+
+  fireEvent.click(previousButton);
+
+  expect(screen.getByText('2 / 2 / 22')).toBeInTheDocument();
+  expect(nextButton).not.toBeDisabled();
+  expect(previousButton).not.toBeDisabled();
+
+  fireEvent.click(previousButton);
+
+  expect(screen.getByText('1 / 1 / 11')).toBeInTheDocument();
+  expect(nextButton).not.toBeDisabled();
+  expect(previousButton).toBeDisabled();
+
+  fireEvent.click(nextButton);
+
+  expect(screen.getByText('2 / 2 / 22')).toBeInTheDocument();
+  expect(nextButton).not.toBeDisabled();
+  expect(previousButton).not.toBeDisabled();
+
+  fireEvent.click(nextButton);
+
+  expect(screen.getByText(currentDate)).toBeInTheDocument();
+  expect(nextButton).toBeDisabled();
+  expect(previousButton).not.toBeDisabled();
 });

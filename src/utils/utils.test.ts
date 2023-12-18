@@ -1,14 +1,98 @@
 import {
+  getCurrentDate,
+  getDaysFromCalendar,
+  getDayById,
+  getLocalStorageTheme,
   editExistingDayText,
   saveNewDay,
   checkCalendarSeparator,
+  getDayByDate,
 } from './utils';
 
 import testData from '../data/testCalendar.json';
+import { AMOUNT_OF_DISPLAYED_DAYS } from './constants';
+
+jest.mock('./constants.ts', () => ({ AMOUNT_OF_DISPLAYED_DAYS: 3 }));
 
 jest.mock('../data/testCalendar.json', () => ({
-  days: [],
+  days: [
+    { _id: '1', date: '1 / 1 / 11', text: '1' },
+    { _id: '2', date: '2 / 2 / 22', text: '2' },
+    { _id: '3', date: '3 / 3 / 33', text: '3' },
+    { _id: '4', date: '4 / 4 / 44', text: '4' },
+  ],
 }));
+
+test('function getCurrentDate returns the current date in "day / month / year" format', () => {
+  const dateString = `${new Date().getDate()} / ${
+    new Date().getMonth() + 1
+  } / ${String(new Date().getFullYear()).slice(-2)}`;
+
+  expect(getCurrentDate()).toBe(dateString);
+});
+
+describe('getDaysFromCalendar', () => {
+  test('returns last 3 days if a calendar is greater than AMOUNT_OF_DISPLAYED_DAYS', () => {
+    const equalCalendar = testData.days.slice(-3);
+    const greaterCalendarResult = getDaysFromCalendar(
+      testData.days,
+      AMOUNT_OF_DISPLAYED_DAYS,
+    );
+
+    expect(greaterCalendarResult).toEqual(equalCalendar);
+  });
+
+  test('returns a full calendar if it is less than or equal to AMOUNT_OF_DISPLAYED_DAYS', () => {
+    const smallCalendar = testData.days.slice(0, AMOUNT_OF_DISPLAYED_DAYS - 1);
+    const equalCalendar = testData.days.slice(0, AMOUNT_OF_DISPLAYED_DAYS);
+    const smallCalendarResult = getDaysFromCalendar(
+      smallCalendar,
+      AMOUNT_OF_DISPLAYED_DAYS,
+    );
+    const equalCalendarResult = getDaysFromCalendar(
+      equalCalendar,
+      AMOUNT_OF_DISPLAYED_DAYS,
+    );
+
+    expect(smallCalendarResult).toEqual(smallCalendar);
+    expect(equalCalendarResult).toEqual(equalCalendar);
+  });
+});
+
+describe('getDayById', () => {
+  test('returns the correct day for a given id', () => {
+    const id = '1';
+    const result = getDayById(testData.days, id);
+
+    expect(result).toEqual({ _id: '1', date: '1 / 1 / 11', text: '1' });
+  });
+
+  test('returns undefined for a non-existent id', () => {
+    const id = '5';
+    const result = getDayById(testData.days, id);
+
+    expect(result).toBeUndefined();
+  });
+
+  test('returns undefined for an empty calendar', () => {
+    const id = '1';
+    const result = getDayById([], id);
+
+    expect(result).toBeUndefined();
+  });
+});
+
+describe('getLocalStorageTheme', () => {
+  test('returns saved value if localstorage stores theme', () => {
+    localStorage.setItem('SuccessDiaryTheme', 'dark');
+    expect(getLocalStorageTheme()).toBe('dark');
+  });
+
+  test('returns default value if localstorage does not store theme', () => {
+    localStorage.removeItem('SuccessDiaryTheme');
+    expect(getLocalStorageTheme()).toBe('light');
+  });
+});
 
 describe('saveNewDay function', () => {
   beforeEach(() => {
@@ -54,8 +138,6 @@ describe('editExistingDayText function', () => {
 });
 
 describe('checkCalendarSeparator test', () => {
-  const AMOUNT_OF_DISPLAYED_DAYS = 15;
-
   test('calendarLength less than AMOUNT_OF_DISPLAYED_DAYS', () => {
     const expectedObject = { checkedIsStart: true, checkedIsEnd: true };
     const calendarLength = 0;
@@ -114,5 +196,25 @@ describe('checkCalendarSeparator test', () => {
     expect(checkCalendarSeparator(calendarSeparator, calendarLength)).toEqual(
       expectedObject,
     );
+  });
+});
+
+describe('getDayByDate function', () => {
+  beforeEach(() => {
+    testData.days = [];
+  });
+
+  test('returns undefined if calendar does not include a day with passed date', () => {
+    const result = getDayByDate(testData.days, '15 / 12 / 23');
+
+    expect(result).toBeUndefined();
+  });
+
+  test('returns a day with passed date if calendar includes it', () => {
+    const expectedDay = { _id: '1', date: '15 / 12 / 23', text: '1' };
+    testData.days = [expectedDay];
+    const result = getDayByDate(testData.days, '15 / 12 / 23');
+
+    expect(result).toEqual(expectedDay);
   });
 });

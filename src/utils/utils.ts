@@ -1,8 +1,6 @@
 import { type CalendarType } from '@Types/types';
-
 import testData from '@Data/testCalendar.json';
-
-const AMOUNT_OF_DISPLAYED_DAYS = 15;
+import { AMOUNT_OF_DISPLAYED_DAYS } from './constants';
 
 export const getLocalStorageTheme = (): string => {
   const savedTheme = localStorage.getItem('SuccessDiaryTheme');
@@ -28,10 +26,11 @@ export const getDaysFromCalendar = (
   calendarSeparator: number,
 ): CalendarType[] => {
   const sliceStart =
-    calendar.length - calendarSeparator < 0
+    calendar.length - calendarSeparator <= 0
       ? 0
       : calendar.length - calendarSeparator;
   const sliceEnd = sliceStart + AMOUNT_OF_DISPLAYED_DAYS;
+
   return calendar.slice(sliceStart, sliceEnd);
 };
 
@@ -59,6 +58,13 @@ export const getDayById = (
   id: string,
 ): CalendarType => {
   return calendar.filter((day) => day._id === id)[0];
+};
+
+export const getDayByDate = (
+  calendar: CalendarType[],
+  date: string,
+): CalendarType | undefined => {
+  return calendar.find((day) => day.date === date);
 };
 
 export const saveNewDay = (date: string, text: string): void => {

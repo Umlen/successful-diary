@@ -81,3 +81,12 @@ export const editExistingDayText = (id: string, newText: string): void => {
     }
   });
 };
+
+export const getDayIndexByDate = (
+  calendar: CalendarType[],
+  date: string,
+): number => {
+  const day = getDayByDate(calendar, date);
+
+  return day ? calendar.indexOf(day) : calendar.length;
+};
